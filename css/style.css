@@ -6,6 +6,16 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
+::-moz-selection { /* Code for Firefox */
+    color: #111;
+    background: #c476b7;
+}
+
+::selection {
+    color: #111;
+    background: #c476b7;
+}
+
 body {
     margin: 0;
     padding: 0;
