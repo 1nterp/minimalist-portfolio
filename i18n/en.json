@@ -7,7 +7,19 @@
   },
   "about":{
     "title": "About",
-    "contents": "Developer for DBMS Query Processor<br/>Developer for Cloud microservices<br/>DevOps Engineer"
+    "1": "DBMS query engine developer",
+    "2": "Cloud microservices DevOps engineer",
+    "3": "drinking-lover <s>not heavy one</s>",
+    "4": "baseball enthusiast, PC/console gamer",
+    "5": "who writes what I watch, listen and think"
+  },
+  "skill":{
+    "title":"Skills/Experiences",
+    "tip":"(practiced first)",
+    "pl":"Programming language",
+    "method":"Development methodology",
+    "ide":"Editor/IDE",
+    "colla":"Collaborative tool"
   },
   "navigation": {
     "home": "Home",
