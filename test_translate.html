@@ -1,32 +1,91 @@
-<header>
-    <h1 data-i18n="header.title">Translate me</h1>
-    <p data-i18n="header.subtitle">This subtitle is getting translated as well</p>
-  </header>
-  
-  <!-- Load the translator either from a CDN or locally -->
-  <script
-    src="scripts/translator.min.js"
-  ></script>
-  <script>
-    // Provide your translations as JSON / JS objects
-    var germanTranslation = {
-      header: {
-        title: 'Eine Überschrift',
-        subtitle: 'Dieser Untertitel ist nur für Demozwecke',
-      },
-    };
-  
-    // Create a new instance of the translator
-    // You can optionally pass options
-    var translator = new Translator({
-        defaultLanguage: "en",
-        filesLocation: '/i18n',
-    });
-  
-    // Add the language to the translator and translate the page
-    translator.fetch(['de', 'en']).then(() => {
-        // You now have both languages available to you
-        translator.translatePageTo('de');
-    });
-    // setTimeout(() => translator.translatePageTo('de'), 3000)
-  </script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Simple Translator VanillaJS Demo</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/test_translate.css" />
+    </head>
+
+    <body>
+        <nav>
+            <a href="#" data-i18n="navigation.home">Home</a>
+            <a href="#" data-i18n="navigation.categories">Categories</a>
+            <a href="#" data-i18n="navigation.about">About</a>
+
+            <label>
+                Language:
+                <select>
+                    <option value="en">EN</option>
+                    <option value="de">DE</option>
+                </select>
+            </label>
+        </nav>
+
+        <main>
+            <h1 data-i18n="title">How To Cook A Juicy Chicken Breast</h1>
+            <p data-i18n="content">
+                There’s a big difference between juicy chicken breasts and
+                rubbery chicken breasts. Obviously, you want to avoid the latter
+                at all costs. Follow these 4 steps and you’re gold. You want to
+                add protein to favorites like Caesar salad or fix up a quick
+                chicken salad or club sandwich? Try this method and savor the
+                results.
+            </p>
+            <h2 data-i18n="ingredients.title">Ingredients</h2>
+            <ul>
+                <li data-i18n="ingredients.$0">
+                    1 pound boneless chicken breasts
+                </li>
+                <li data-i18n="ingredients.$1">2 teaspoons olive oil</li>
+                <li data-i18n="ingredients.$2">salt and pepper</li>
+            </ul>
+            <button type="button" data-i18n="dialog.button">
+                Show calories
+            </button>
+        </main>
+
+        <script src="scripts/translator.min.js"></script>
+        <script>
+            // The below provided options are default.
+            var translator = new Translator({
+                defaultLanguage: "en",
+                detectLanguage: true,
+                selector: "[data-i18n]",
+                debug: false,
+                registerGlobally: "__",
+                persist: false,
+                persistKey: "preferred_language",
+                filesLocation: "i18n",
+            });
+
+            translator.fetch(["de", "en"]).then(() => {
+                // Calling `translatePageTo()` without any parameters
+                // will translate to the default language.
+                translator.translatePageTo();
+                registerLanguageToggle();
+            });
+
+            function registerLanguageToggle() {
+                var select = document.querySelector("select");
+
+                select.addEventListener("change", (evt) => {
+                    var language = evt.target.value;
+                    translator.translatePageTo(language);
+                });
+            }
+
+            document.querySelector("button").addEventListener("click", () => {
+                // Using `translateForKey()` without a target language,
+                // the current language will be used.
+                // See: https://github.com/andreasremdt/simple-translator#user-content-translateforkeystring-key-string-language
+                alert(translator.translateForKey("dialog.content"));
+                // You can also use the shorthand helper:
+                console.log(__("dialog.content"));
+            });
+        </script>
+    </body>
+</html>

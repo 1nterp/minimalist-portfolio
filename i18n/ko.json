@@ -1,0 +1,12 @@
+{
+  "title": "인터피 프로필",
+  "left":{
+    "name": "박종헌",
+    "city": "서울특별시",
+    "country": "대한민국"
+  },
+  "about":{
+    "title": "소개",
+    "contents": "DBMS 쿼리 프로세서 개발자<br/>클라우드 마이크로서비스 개발자<br/>DevOps 엔지니어"
+  }
+}
