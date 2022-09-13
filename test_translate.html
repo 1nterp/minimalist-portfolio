@@ -1,0 +1,32 @@
+<header>
+    <h1 data-i18n="header.title">Translate me</h1>
+    <p data-i18n="header.subtitle">This subtitle is getting translated as well</p>
+  </header>
+  
+  <!-- Load the translator either from a CDN or locally -->
+  <script
+    src="scripts/translator.min.js"
+  ></script>
+  <script>
+    // Provide your translations as JSON / JS objects
+    var germanTranslation = {
+      header: {
+        title: 'Eine Überschrift',
+        subtitle: 'Dieser Untertitel ist nur für Demozwecke',
+      },
+    };
+  
+    // Create a new instance of the translator
+    // You can optionally pass options
+    var translator = new Translator({
+        defaultLanguage: "en",
+        filesLocation: '/i18n',
+    });
+  
+    // Add the language to the translator and translate the page
+    translator.fetch(['de', 'en']).then(() => {
+        // You now have both languages available to you
+        translator.translatePageTo('de');
+    });
+    // setTimeout(() => translator.translatePageTo('de'), 3000)
+  </script>
